@@ -33,7 +33,7 @@ class USBDevice {
 public:
     // init for a specific device + manufacturer
     USBDevice(UInt16 idVendor, UInt16 idProduct);
-    virtual ~USBDevice();
+    virtual ~USBDevice(); // if subclassed pls call this
     
     bool valid();   // device handle non-null
     bool open();    // opens device for readwrite
@@ -47,9 +47,25 @@ public:
     bool enumerateInterfaces();         // this is called automatically on setConfiguration()
     UInt8 numInterfaces();              // interfaces in the current configuration
     bool openInterface(UInt8 index);    // open an interface for readwrite
+    bool setAltInterface(UInt8 index,
+                         UInt8 setting);// sets alternate setting for an interface
     bool closeInterface(UInt8 index);   // release readwrite lock on interface
     UInt8 openAllInterfaces();          // returns how many were opened (0=err)
     UInt8 closeAllInterfaces();         // same as openAllInterfaces
+    
+    UInt8 numEndpoints(UInt8 intIndex); // get endpoints in an interface
+    
+    IOUSBInterfaceDescriptor *
+    getInterfaceDescriptor(UInt8 index);// gets the descriptor for the given index
+    
+    // Get info about a pipe
+    bool getPipeProperties(UInt8 interface,
+                           UInt8 endpoint,
+                           UInt8 *direction,
+                           UInt8 *number,
+                           UInt8 *transferType,
+                           UInt16 *maxPacketSize,
+                           UInt8 *interval);
     
     IOUSBDeviceInterface650 **getDevInterface() { return devIntf; }
     

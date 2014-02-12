@@ -55,6 +55,8 @@ USBDevice::USBDevice(UInt16 idVendor, UInt16 idProduct) {
 
 USBDevice::~USBDevice() {
     IOObjectRelease(devService);
+    closeAllInterfaces();
+    close();
 }
 
 bool USBDevice::valid() {
@@ -167,6 +169,12 @@ UInt8 USBDevice::closeAllInterfaces() {
     return ret;
 }
 
+bool USBDevice::setAltInterface(UInt8 index, UInt8 setting) {    
+    return valid() &&
+    index < interfaces.size() &&
+    !_d(interfaces[index])->SetAlternateInterface(interfaces[index], setting);
+}
+
 IOUSBConfigurationDescriptor *USBDevice::getConfigurationDesc(UInt8 index) {
     if(!valid()) return nullptr;
     IOUSBConfigurationDescriptor *desc = new IOUSBConfigurationDescriptor;
@@ -174,5 +182,37 @@ IOUSBConfigurationDescriptor *USBDevice::getConfigurationDesc(UInt8 index) {
     _ifnot(KERN_SUCCESS, ret) {
         delete desc;
     }
-    return !desc ? nullptr : desc;
+    return desc;
+}
+
+IOUSBInterfaceDescriptor *USBDevice::getInterfaceDescriptor(UInt8 index) {
+    if(!valid() || index >= interfaces.size()) return nullptr;
+    IOUSBInterfaceDescriptor *desc;
+    desc = (typeof desc)_d(interfaces[index])->FindNextAssociatedDescriptor(interfaces[index], nullptr, kUSBInterfaceDesc);
+    return desc;
+}
+
+UInt8 USBDevice::numEndpoints(UInt8 intIndex) {
+    if(!valid() || intIndex >= interfaces.size()) return 0;
+    UInt8 ret = 0;
+    _d(interfaces[intIndex])->GetNumEndpoints(interfaces[intIndex], &ret);
+    return ret;
+}
+
+bool USBDevice::getPipeProperties(UInt8 interface,
+                                  UInt8 endpoint,
+                                  UInt8 *direction,
+                                  UInt8 *number,
+                                  UInt8 *transferType,
+                                  UInt16 *maxPacketSize,
+                                  UInt8 *interval) {
+    return valid()
+    && interface <= interfaces.size()
+    && !_d(interfaces[interface])->GetPipeProperties(interfaces[interface],
+                                                     endpoint,
+                                                     direction,
+                                                     number,
+                                                     transferType,
+                                                     maxPacketSize,
+                                                     interval);
 }
