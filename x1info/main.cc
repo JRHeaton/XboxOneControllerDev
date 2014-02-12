@@ -40,10 +40,23 @@ int main(int argc, const char * argv[]) {
         
         UInt8 dir, type;
         UInt16 mpkt;
-        UInt8 dummy, num;
+        UInt8 inter, num;
+        static const char *dir_names[4] = {
+            "out",
+            "in",
+            "none",
+            "any"
+        },
+        *type_names[5] = {
+            "control",
+            "isochronous",
+            "bulk",
+            "interrupt",
+            "any"
+        };
         for(int pipe=0;pipe<d.numEndpoints(i);++pipe) {
-            d.getPipeProperties(i, pipe, &dir, &num, &type, &mpkt, &dummy);
-            printf("dir(interface %d, pipe %d): [dir=0x%x type=0x%x, num=0x%x]\n", i, pipe, dir, type, num);
+            d.getPipeProperties(i, pipe, &dir, &num, &type, &mpkt, &inter);
+            printf("dir(interface %d, pipe %d): [dir=%s, type=%s, mpktsize=0x%x, poll=%ums]\n", i, pipe, dir_names[dir], type_names[type], mpkt, inter);
         }
     }
     

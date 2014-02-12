@@ -58,6 +58,10 @@ public:
     IOUSBInterfaceDescriptor *
     getInterfaceDescriptor(UInt8 index);// gets the descriptor for the given index
     
+    IOUSBEndpointDescriptor *
+    getEndpointDescriptor(UInt8 interface,
+                          UInt8 index);
+    
     // Get info about a pipe
     bool getPipeProperties(UInt8 interface,
                            UInt8 endpoint,
