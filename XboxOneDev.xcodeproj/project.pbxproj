@@ -1,0 +1,250 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		52F7682718AB2DB900142F35 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F7682618AB2DB900142F35 /* CoreFoundation.framework */; };
+		52F7682A18AB2DB900142F35 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 52F7682918AB2DB900142F35 /* main.cc */; };
+		52F7683218AB2E1900142F35 /* USBDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52F7683018AB2E1900142F35 /* USBDevice.cpp */; };
+		52F7683418AB2ED900142F35 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F7683318AB2ED900142F35 /* IOKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		52F7682118AB2DB900142F35 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		52F7682318AB2DB900142F35 /* x1info */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = x1info; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F7682618AB2DB900142F35 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		52F7682918AB2DB900142F35 /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
+		52F7683018AB2E1900142F35 /* USBDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = USBDevice.cpp; sourceTree = "<group>"; };
+		52F7683118AB2E1900142F35 /* USBDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USBDevice.h; sourceTree = "<group>"; };
+		52F7683318AB2ED900142F35 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		52F7682018AB2DB900142F35 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52F7683418AB2ED900142F35 /* IOKit.framework in Frameworks */,
+				52F7682718AB2DB900142F35 /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		52F7681818AB2D9900142F35 = {
+			isa = PBXGroup;
+			children = (
+				52F7682818AB2DB900142F35 /* x1info */,
+				52F7682518AB2DB900142F35 /* Frameworks */,
+				52F7682418AB2DB900142F35 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		52F7682418AB2DB900142F35 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				52F7682318AB2DB900142F35 /* x1info */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		52F7682518AB2DB900142F35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52F7683318AB2ED900142F35 /* IOKit.framework */,
+				52F7682618AB2DB900142F35 /* CoreFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		52F7682818AB2DB900142F35 /* x1info */ = {
+			isa = PBXGroup;
+			children = (
+				52F7682918AB2DB900142F35 /* main.cc */,
+				52F7683118AB2E1900142F35 /* USBDevice.h */,
+				52F7683018AB2E1900142F35 /* USBDevice.cpp */,
+			);
+			path = x1info;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		52F7682218AB2DB900142F35 /* x1info */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F7682D18AB2DB900142F35 /* Build configuration list for PBXNativeTarget "x1info" */;
+			buildPhases = (
+				52F7681F18AB2DB900142F35 /* Sources */,
+				52F7682018AB2DB900142F35 /* Frameworks */,
+				52F7682118AB2DB900142F35 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = x1info;
+			productName = x1info;
+			productReference = 52F7682318AB2DB900142F35 /* x1info */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		52F7681918AB2D9900142F35 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 52F7681C18AB2D9900142F35 /* Build configuration list for PBXProject "XboxOneDev" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 52F7681818AB2D9900142F35;
+			productRefGroup = 52F7682418AB2DB900142F35 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				52F7682218AB2DB900142F35 /* x1info */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		52F7681F18AB2DB900142F35 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52F7683218AB2E1900142F35 /* USBDevice.cpp in Sources */,
+				52F7682A18AB2DB900142F35 /* main.cc in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		52F7681D18AB2D9900142F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		52F7681E18AB2D9900142F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		52F7682E18AB2DB900142F35 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		52F7682F18AB2DB900142F35 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		52F7681C18AB2D9900142F35 /* Build configuration list for PBXProject "XboxOneDev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F7681D18AB2D9900142F35 /* Debug */,
+				52F7681E18AB2D9900142F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F7682D18AB2DB900142F35 /* Build configuration list for PBXNativeTarget "x1info" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F7682E18AB2DB900142F35 /* Debug */,
+				52F7682F18AB2DB900142F35 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 52F7681918AB2D9900142F35 /* Project object */;
+}
