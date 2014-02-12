@@ -195,7 +195,9 @@ IOUSBInterfaceDescriptor *USBDevice::getInterfaceDescriptor(UInt8 index) {
 UInt8 USBDevice::numEndpoints(UInt8 intIndex) {
     if(!valid() || intIndex >= interfaces.size()) return 0;
     UInt8 ret = 0;
-    _d(interfaces[intIndex])->GetNumEndpoints(interfaces[intIndex], &ret);
+    _ifnot(KERN_SUCCESS, _d(interfaces[intIndex])->GetNumEndpoints(interfaces[intIndex], &ret)) {
+        _err("failed to get endpoints\n");
+    }
     return ret;
 }
 
@@ -209,7 +211,7 @@ bool USBDevice::getPipeProperties(UInt8 interface,
     return valid()
     && interface <= interfaces.size()
     && !_d(interfaces[interface])->GetPipeProperties(interfaces[interface],
-                                                     endpoint,
+                                                     endpoint+1, // exclude control pipe
                                                      direction,
                                                      number,
                                                      transferType,

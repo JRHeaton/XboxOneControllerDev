@@ -35,6 +35,8 @@ int main(int argc, const char * argv[]) {
     
     for(int i=0;i<d.numInterfaces();++i) {
         d.openInterface(i);
+        d.setAltInterface(i, 1);
+        printf("Enumerating %d pipes\n", d.numEndpoints(i));
         
         UInt8 dir, type;
         UInt16 mpkt;
