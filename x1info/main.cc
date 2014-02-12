@@ -8,6 +8,7 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include "USBDevice.h"
+#include "XboxOneController.h"
 #include <iostream>
 
 using std::cout; using std::endl;
@@ -16,18 +17,23 @@ using std::cout; using std::endl;
 #define AFTERGLOW_VENDOR    0x0e6f
 #define AFTERGLOW_PRODUCT   0x0213
 
-#define X1_VENDOR           0x045E  // MSFT
-#define X1_PID              0x02D1
-
 #define TESTING_X1          1       // easy testing for me
+#define RESET_AND_QUIT      0       // for ease during testing
 
 int main(int argc, const char * argv[]) {
-    USBDevice d
+    XboxOneController d
 #if TESTING_X1 == 0
     (AFTERGLOW_VENDOR, AFTERGLOW_PRODUCT);
 #else
     (X1_VENDOR, X1_PID);
 #endif
+    
+    if(RESET_AND_QUIT) {
+        d.open();
+        d.reset();
+        return 0;
+    }
+    
     cout <<
     "open: " << d.open() << endl <<
     "setConfiguration: " << d.setConfiguration() << endl <<
@@ -59,6 +65,8 @@ int main(int argc, const char * argv[]) {
             printf("dir(interface %d, pipe %d): [dir=%s, type=%s, mpktsize=0x%x, poll=%ums]\n", i, pipe, dir_names[dir], type_names[type], mpkt, inter);
         }
     }
+    
+    printf("%d\n", d.ledOn());
     
     return 0;
 }

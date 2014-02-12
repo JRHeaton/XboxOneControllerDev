@@ -192,6 +192,12 @@ IOUSBInterfaceDescriptor *USBDevice::getInterfaceDescriptor(UInt8 index) {
     return desc;
 }
 
+bool USBDevice::write(UInt8 intfIndex, UInt8 pipeIndex, UInt8 *data, size_t len) {
+    return valid()
+    && intfIndex < interfaces.size()
+    && !_d(interfaces[intfIndex])->WritePipe(interfaces[intfIndex], pipeIndex+1, data, (UInt32)len);
+}
+
 UInt8 USBDevice::numEndpoints(UInt8 intIndex) {
     if(!valid() || intIndex >= interfaces.size()) return 0;
     UInt8 ret = 0;

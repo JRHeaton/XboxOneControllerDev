@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5206281018AC352800CEE0E3 /* XboxOneController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5206280E18AC352800CEE0E3 /* XboxOneController.cpp */; };
 		52F7682718AB2DB900142F35 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F7682618AB2DB900142F35 /* CoreFoundation.framework */; };
 		52F7682A18AB2DB900142F35 /* main.cc in Sources */ = {isa = PBXBuildFile; fileRef = 52F7682918AB2DB900142F35 /* main.cc */; };
 		52F7683218AB2E1900142F35 /* USBDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52F7683018AB2E1900142F35 /* USBDevice.cpp */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5206280E18AC352800CEE0E3 /* XboxOneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XboxOneController.cpp; sourceTree = "<group>"; };
+		5206280F18AC352800CEE0E3 /* XboxOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XboxOneController.h; sourceTree = "<group>"; };
 		52F7682318AB2DB900142F35 /* x1info */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = x1info; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F7682618AB2DB900142F35 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		52F7682918AB2DB900142F35 /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
@@ -79,6 +82,8 @@
 				52F7682918AB2DB900142F35 /* main.cc */,
 				52F7683118AB2E1900142F35 /* USBDevice.h */,
 				52F7683018AB2E1900142F35 /* USBDevice.cpp */,
+				5206280E18AC352800CEE0E3 /* XboxOneController.cpp */,
+				5206280F18AC352800CEE0E3 /* XboxOneController.h */,
 			);
 			path = x1info;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52F7683218AB2E1900142F35 /* USBDevice.cpp in Sources */,
+				5206281018AC352800CEE0E3 /* XboxOneController.cpp in Sources */,
 				52F7682A18AB2DB900142F35 /* main.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

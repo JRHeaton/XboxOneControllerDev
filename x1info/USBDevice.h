@@ -71,6 +71,11 @@ public:
                            UInt16 *maxPacketSize,
                            UInt8 *interval);
     
+    bool write(UInt8 intfIndex,
+               UInt8 pipeIndex,
+               UInt8 *data,
+               size_t len);
+    
     IOUSBDeviceInterface650 **getDevInterface() { return devIntf; }
     
 private:
