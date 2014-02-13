@@ -7,13 +7,14 @@
 //
 
 #include "XboxOneController.h"
+#include "XboxOneDefinitions.h"
 
 #define X1_INTERRUPT_INTERFACE 0
 #define X1_INTERRUPT_OUT 0
 
 bool XboxOneController::ledOn() {
     UInt8 cmd[2] = { 0xe4, 0x60 };
-    return write(X1_INTERRUPT_INTERFACE, 0, cmd, 2);
+    return this->write(X1_INTERRUPT_INTERFACE, 0, cmd, 2);
 }
 
 void XboxOneController::parseInputBuffer(UInt8 *bbuf, UInt64 len)
@@ -51,50 +52,45 @@ void XboxOneController::handleInput(UInt8 *bbuf, UInt64 len)
 {
     // Ignore 3 first bytes, they seem useless
     // Or they identify the gamepad, unsure about that, need a second pad.
-    int buttonVal = bbuf[4];
-    int lbV = buttonVal / 0x10;
-    int rbV = buttonVal % 0x10;
+    XboxOneSplitBuffer btnv = _sb(bbuf[4]);
     buttons bState = {
-        .A = (lbV & 0x1) == 0x1,
-        .B = (lbV & 0x2) == 0x2,
-        .X = (lbV & 0x4) == 0x4,
-        .Y = (lbV & 0x8) == 0x8
+        .A = _cf(btnv.hb, XboxOneButtonA),
+        .B = _cf(btnv.hb, XboxOneButtonB),
+        .X = _cf(btnv.hb, XboxOneButtonX),
+        .Y = _cf(btnv.hb, XboxOneButtonY)
     };
-    printf("\t_BTN (%x) X=%d, Y=%d, B=%d, A=%d\n", lbV, bState.X, bState.Y, bState.B, bState.A);
+    printf("\t_BTN (%x) X=%d, Y=%d, B=%d, A=%d\n", btnv.hb, bState.X, bState.Y, bState.B, bState.A);
 
     menu mState = {
-        .SELECT = (rbV & 0x8) == 0x8,
-        .START = (rbV & 0x4) == 0x4,
-        .SYNC = (rbV & 0x1) == 0x1
+        .SELECT = _cf(btnv.lb, XboxOneMenuButtonSelect),
+        .START  = _cf(btnv.lb, XboxOneMenuButtonStart),
+        .SYNC   = _cf(btnv.lb, XboxOneMenuButtonSync)
     };
-    printf("\t_MENU (%x) SELECT=%d, START=%d, SYNC=%d\n", rbV, mState.SELECT, mState.START, mState.SYNC);
+    printf("\t_MENU (%x) SELECT=%d, START=%d, SYNC=%d\n", btnv.lb, mState.SELECT, mState.START, mState.SYNC);
 
-    int controlVal = bbuf[5];
-
-    int lctlV = controlVal / 0x10;
-    int rctlV = controlVal % 0x10;
+    XboxOneSplitBuffer ctlv = _sb(bbuf[5]);
     trigBtn tState = {
-        .LB = (lctlV & 0x1) == 0x1,
-        .RB = (lctlV & 0x2) == 0x2
+        .LB = _cf(ctlv.hb, XboxOneTriggerStickButtonLB),
+        .RB = _cf(ctlv.hb, XboxOneTriggerStickButtonRB)
     };
 
-    printf("\t_TRIG (%x) LB=%d, RB=%d\n", lctlV, tState.LB, tState.RB);
+    printf("\t_TRIG (%x) LB=%d, RB=%d\n", ctlv.hb, tState.LB, tState.RB);
 
     joyBtn jState = {
-        .LS = (lctlV & 0x4) == 0x4,
-        .RS = (lctlV & 0x8) == 0x8,
+        .LS = _cf(ctlv.hb, XboxOneTriggerStickButtonLS),
+        .RS = _cf(ctlv.hb, XboxOneTriggerStickButtonRS),
     };
 
-    printf("\t_JOY (%x) LS=%d, RS=%d\n", lctlV, jState.LS, jState.RS);
+    printf("\t_JOY (%x) LS=%d, RS=%d\n", ctlv.hb, jState.LS, jState.RS);
 
     dPad pState = {
-        .UP = (rctlV & 0x1) == 0x1,
-        .DOWN = (rctlV & 0x2) == 0x2,
-        .LEFT = (rctlV & 0x4) == 0x4,
-        .RIGHT = (rctlV & 0x8) == 0x8
+        .UP = _cf(ctlv.lb, XboxOneDirectionalPadUp),
+        .DOWN = _cf(ctlv.lb, XboxOneDirectionalPadDown),
+        .LEFT = _cf(ctlv.lb, XboxOneDirectionalPadLeft),
+        .RIGHT = _cf(ctlv.lb, XboxOneDirectionalPadRight)
     };
 
-    printf("\t_DPAD (%x) UP=%d, DOWN=%d, LEFT=%d, RIGHT=%d\n", rctlV, pState.UP, pState.DOWN, pState.LEFT, pState.RIGHT);
+    printf("\t_DPAD (%x) UP=%d, DOWN=%d, LEFT=%d, RIGHT=%d\n", ctlv.lb, pState.UP, pState.DOWN, pState.LEFT, pState.RIGHT);
 
     trigger lt = {
         .value = bbuf[6] + 0xff * bbuf[7],

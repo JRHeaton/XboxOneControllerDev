@@ -10,59 +10,15 @@
 #define __XboxOneDev__XboxOneController__
 
 #include "USBDevice.h"
+#include "XboxOneDefinitions.h"
 
 #define X1_VENDOR           0x045E  // MSFT
 #define X1_PID              0x02D1
 
-typedef enum XboxOneMessageType {
-    XBMsgSystem     = 6,
-    XBMsgInput      = 18,
-    XBMsgUnknown    = 8
-} XboxOneMessageType;
-
-typedef struct {
-    bool A;
-    bool B;
-    bool X;
-    bool Y;
-} buttons;
-
-typedef struct {
-    bool SELECT;
-    bool START;
-    bool SYNC;
-} menu;
-
-typedef struct {
-    bool RB;
-    bool LB;
-} trigBtn;
-
-typedef struct {
-    bool RS;
-    bool LS;
-} joyBtn;
-
-typedef struct {
-    bool UP;
-    bool DOWN;
-    bool LEFT;
-    bool RIGHT;
-} dPad;
-
-typedef struct {
-    short unsigned int state;
-    int value;
-} trigger;
-
-typedef struct {
-    UInt x;
-    UInt y;
-    UInt x_dev;
-    UInt y_dev;
-} stick;
-
 class XboxOneController : public USBDevice {
+private:
+    void handleInput(UInt8 *bbuf, UInt64 len);
+
 public:
     XboxOneController(UInt16 idVendor=X1_VENDOR, UInt16 idProduct=X1_PID) : USBDevice(idVendor, idProduct) {}
 
@@ -70,7 +26,7 @@ public:
 
     void parseInputBuffer(UInt8 *bbuf, UInt64 len);
 
-    void handleInput(UInt8 *bbuf, UInt64 len);
+    bool vibrate(UInt intensity, XboxOneVibrationRotor rotor);
 };
 
 #endif /* defined(__XboxOneDev__XboxOneController__) */

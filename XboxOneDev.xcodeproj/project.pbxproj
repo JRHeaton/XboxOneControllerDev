@@ -27,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3434C6EA2FC156E4D8821225 /* XboxOneDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XboxOneDefinitions.h; sourceTree = "<group>"; };
 		5206280E18AC352800CEE0E3 /* XboxOneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XboxOneController.cpp; sourceTree = "<group>"; };
 		5206280F18AC352800CEE0E3 /* XboxOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XboxOneController.h; sourceTree = "<group>"; };
 		5206281118AC4D6200CEE0E3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -86,6 +87,7 @@
 				52F7683018AB2E1900142F35 /* USBDevice.cpp */,
 				5206280E18AC352800CEE0E3 /* XboxOneController.cpp */,
 				5206280F18AC352800CEE0E3 /* XboxOneController.h */,
+				3434C6EA2FC156E4D8821225 /* XboxOneDefinitions.h */,
 			);
 			path = x1info;
 			sourceTree = "<group>";
