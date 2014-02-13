@@ -11,7 +11,7 @@
 // Macro to check flag
 #define _cf(val, flag) (val & flag) == flag
 
-typedef union XboxOneSplitBuffer {
+typedef struct XboxOneSplitBuffer {
     unsigned int whole;
     unsigned char hb;
     unsigned char lb;
@@ -102,7 +102,5 @@ typedef struct stick {
     UInt x_dev;
     UInt y_dev;
 } stick;
-
-
 
 #endif //__XboxOneDefinitions_H_
