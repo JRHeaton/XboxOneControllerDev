@@ -27,6 +27,8 @@ public:
     void parseInputBuffer(UInt8 *bbuf, UInt64 len);
 
     bool vibrate(UInt intensity, XboxOneVibrationRotor rotor);
+
+    void init();
 };
 
 #endif /* defined(__XboxOneDev__XboxOneController__) */

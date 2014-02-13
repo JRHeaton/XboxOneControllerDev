@@ -12,6 +12,26 @@
 #define X1_INTERRUPT_INTERFACE 0
 #define X1_INTERRUPT_OUT 0
 
+void XboxOneController::init()
+{
+    this->openAllInterfaces();
+    this->setAltInterface(0, 1);
+    this->setAltInterface(1, 1);
+    this->setAltInterface(2, 1);
+
+    // I have no idea what I'm doing
+    UInt8 ipl[2][2];
+    ipl[0][0] = 0x25;
+    ipl[0][1] = 0x39;
+    ipl[1][0] = 0xc5;
+    ipl[1][1] = 0xe0;
+
+    this->write(0, 0, ipl[0], 2);
+    this->write(0, 0, ipl[1], 2);
+    this->write(0, 0, ipl[0], 2);
+    this->write(0, 0, ipl[1], 2);
+}
+
 bool XboxOneController::ledOn() {
     UInt8 cmd[2] = { 0xe4, 0x60 };
     return this->write(X1_INTERRUPT_INTERFACE, 0, cmd, 2);
@@ -123,4 +143,10 @@ void XboxOneController::handleInput(UInt8 *bbuf, UInt64 len)
     };
 
     printf("\t_RS x=%d, y=%d, x_dev=%d, y_dev=%d\n", rs.x, rs.y, rs.x_dev, rs.y_dev);
+}
+
+bool XboxOneController::vibrate(UInt intensity, XboxOneVibrationRotor rotor)
+{
+    UInt8 party = rotor;
+    return this->write(X1_INTERRUPT_INTERFACE, 0, &party, sizeof(party));
 }
