@@ -17,13 +17,8 @@ UInt8 *bbuf;
 
 int readsize;
 void inputcb(void *refcon, IOReturn result, void *len) {
-    printf("INPUT ");
-    for(int i=0;i<((UInt64)len);++i) {
-        printf("%02x ", bbuf[i]);
-    }
-    puts("");
-    
     XboxOneController *d = (XboxOneController *)refcon;
+    d->parseInputBuffer(bbuf, (UInt64) len);
     (* d->getInterface(0))->ReadPipeAsync(d->getInterface(0), 2, bbuf, readsize, inputcb, d);
 }
 
@@ -95,7 +90,7 @@ int main(int argc, const char * argv[]) {
             d.getPipeProperties(i, pipe, &dir, &num, &type, &mpkt, &inter);
             printf("dir(interface %d, pipe %d): [dir=%s, type=%s, mpktsize=0x%x, poll=%ums]\n", i, pipe, dir_names[dir], type_names[type], mpkt, inter);
             
-            if(dir & kUSBIn && i == 0) {
+            if (dir & kUSBIn && i == 0) {
                 
                 // ------------------------------
                 // This code enables the controller to report back info over the interrupt pipe
@@ -131,7 +126,7 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-//    printf("%d\n", d.ledOn());
+    //printf("%d\n", d.ledOn());
 
     (* d.getInterface(0))->ReadPipeAsync(d.getInterface(0), 2, bbuf, readsize, inputcb, &d);
     CFRunLoopRun();
