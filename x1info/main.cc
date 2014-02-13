@@ -51,7 +51,12 @@ int main(int argc, const char * argv[]) {
     "open: " << d.open() << endl <<
     "setConfiguration: " << d.setConfiguration() << endl <<
     "numInterfaces: " << (int)d.numInterfaces() << endl;
-    
+
+    if (d.numInterfaces() == 0)
+    {
+        cout << "Device is not ready!" << endl;
+        return 0;
+    }
     
     for(int i=0;i<d.numInterfaces();++i) {
         d.openInterface(i);
