@@ -2,12 +2,17 @@ XboxOneDev
 ==========
 Collection of tests, ideas, and whatever code we want relating to Xbox One peripherals.
 
-
 ## USB Information
 The Xbox One controller has a single USB configuration (1), and two altinterface settings for each of the three (3) interfaces that that configuration supplies.
 
 idVendor(MSFT): ```0x045E```
 idProduct: ```0x02D1```
+
+The controller, unlike the 360, does not spit out button state, HID-like reports over the interrupt pipe automatically. That IS what the pipe is for, but there are seemingly two(or more) byte binary messages sent over the output interrupt pipe that enable or disable features or state.
+
+| Message | Effect |
+| ------- | ------ |
+| ```E4 60``` | Turn X LED on? |
 
 #### Device Descriptor
 ```
@@ -43,8 +48,6 @@ Interface #1 - Vendor-specific (#1)
         Max Packet Size:   228
         Polling Interval:   1 ms
 
-
-
 Interface #1 - Vendor-specific (#1)
     Alternate Setting   1
     Number of Endpoints   2
@@ -61,7 +64,6 @@ Interface #1 - Vendor-specific (#1)
         Attributes:   0x01  (Isochronous no synchronization data endpoint)
         Max Packet Size:   228
         Polling Interval:   1 ms
-
 
 Interface #2 - Vendor-specific (#1)
     Alternate Setting   1
