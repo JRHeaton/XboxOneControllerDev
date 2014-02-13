@@ -29,6 +29,7 @@
 /* Begin PBXFileReference section */
 		5206280E18AC352800CEE0E3 /* XboxOneController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = XboxOneController.cpp; sourceTree = "<group>"; };
 		5206280F18AC352800CEE0E3 /* XboxOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XboxOneController.h; sourceTree = "<group>"; };
+		5206281118AC4D6200CEE0E3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		52F7682318AB2DB900142F35 /* x1info */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = x1info; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F7682618AB2DB900142F35 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		52F7682918AB2DB900142F35 /* main.cc */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cc; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 		52F7682818AB2DB900142F35 /* x1info */ = {
 			isa = PBXGroup;
 			children = (
+				5206281118AC4D6200CEE0E3 /* README.md */,
 				52F7682918AB2DB900142F35 /* main.cc */,
 				52F7683118AB2E1900142F35 /* USBDevice.h */,
 				52F7683018AB2E1900142F35 /* USBDevice.cpp */,
