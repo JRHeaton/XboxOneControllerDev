@@ -29,6 +29,8 @@ public:
     bool vibrate(UInt intensity, XboxOneVibrationRotor rotor);
 
     void init();
+
+    void shutdown();
 };
 
 #endif /* defined(__XboxOneDev__XboxOneController__) */

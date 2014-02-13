@@ -32,6 +32,21 @@ void XboxOneController::init()
     this->write(0, 0, ipl[1], 2);
 }
 
+void XboxOneController::shutdown()
+{
+    UInt8 ipl[2][2];
+    ipl[0][0] = 0xc5;
+    ipl[0][1] = 0xe0;
+    ipl[1][0] = 0x25;
+    ipl[1][1] = 0x39;
+
+    this->write(0, 0, ipl[0], 2);
+    this->write(0, 0, ipl[1], 2);
+    this->write(0, 0, ipl[0], 2);
+    this->write(0, 0, ipl[1], 2);
+}
+
+
 bool XboxOneController::ledOn() {
     UInt8 cmd[2] = { 0xe4, 0x60 };
     return this->write(X1_INTERRUPT_INTERFACE, 0, cmd, 2);
