@@ -50,6 +50,18 @@ typedef struct {
     bool RIGHT;
 } dPad;
 
+typedef struct {
+    short unsigned int state;
+    int value;
+} trigger;
+
+typedef struct {
+    UInt x;
+    UInt y;
+    UInt x_dev;
+    UInt y_dev;
+} stick;
+
 class XboxOneController : public USBDevice {
 public:
     XboxOneController(UInt16 idVendor=X1_VENDOR, UInt16 idProduct=X1_PID) : USBDevice(idVendor, idProduct) {}
