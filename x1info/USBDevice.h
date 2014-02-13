@@ -77,6 +77,7 @@ public:
                size_t len);
     
     IOUSBDeviceInterface650 **getDevInterface() { return devIntf; }
+    IOUSBInterfaceInterface650 **getInterface(UInt8 index) { return (index < interfaces.size()) ? interfaces[index] : nullptr; }
     
 private:
     io_service_t devService;

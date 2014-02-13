@@ -13,6 +13,22 @@
 
 using std::cout; using std::endl;
 
+UInt8 *bbuf;
+
+int readsize;
+void inputcb(void *refcon, IOReturn result, void *len) {
+    printf("INPUT ");
+    for(int i=0;i<((UInt64)len);++i) {
+        printf("%02x ", bbuf[i]);
+    }
+    puts("");
+    
+    XboxOneController *d = (XboxOneController *)refcon;
+    (* d->getInterface(0))->ReadPipeAsync(d->getInterface(0), 2, bbuf, readsize, inputcb, d);
+}
+
+mach_port_t inport;
+
 // these are for the 360 controller i have. i'm using it for reference testing
 #define AFTERGLOW_VENDOR    0x0e6f
 #define AFTERGLOW_PRODUCT   0x0213
@@ -34,10 +50,13 @@ int main(int argc, const char * argv[]) {
         return 0;
     }
     
+    bbuf = (UInt8 *)malloc(64);
+    
     cout <<
     "open: " << d.open() << endl <<
     "setConfiguration: " << d.setConfiguration() << endl <<
     "numInterfaces: " << (int)d.numInterfaces() << endl;
+    
     
     for(int i=0;i<d.numInterfaces();++i) {
         d.openInterface(i);
@@ -60,13 +79,62 @@ int main(int argc, const char * argv[]) {
             "interrupt",
             "any"
         };
+        
+        (* d.getInterface(0))->CreateInterfaceAsyncPort(d.getInterface(0), &inport);
+        CFRunLoopSourceRef src;
+        (* d.getInterface(0))->CreateInterfaceAsyncEventSource(d.getInterface(0), &src);
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), src, kCFRunLoopCommonModes);
+        
+        if(!i) {
+
+            readsize = 64;
+            (* d.getInterface(0))->ReadPipeAsync(d.getInterface(0), 2, bbuf, readsize, inputcb, &d);
+        }
+        
         for(int pipe=0;pipe<d.numEndpoints(i);++pipe) {
             d.getPipeProperties(i, pipe, &dir, &num, &type, &mpkt, &inter);
             printf("dir(interface %d, pipe %d): [dir=%s, type=%s, mpktsize=0x%x, poll=%ums]\n", i, pipe, dir_names[dir], type_names[type], mpkt, inter);
+            
+            if(dir & kUSBIn && i == 0) {
+                
+                // ------------------------------
+                // This code enables the controller to report back info over the interrupt pipe
+                // I have no fucking clue why
+                // - you must send these messages twice ?
+                // - they seem to sometimes turn on the LED also...
+                // - but then what does the message in ledOn() (XboxOneController) do???
+                // - I'm thinking these are binary proprietary messages, used to turn on or off
+                // features of the controller, possibly to save bus bandwidth or power?
+                // we really need a good idea and better way to investigate what means what
+                
+                // good start tho
+                UInt8 c[2];
+                c[0] = 0x25;
+                c[1] = 0x39;
+                
+                d.write(0, 0, c, 2);
+                
+                c[0] = 0xc5;
+                c[1] = 0xe0;
+                d.write(0, 0, c, 2);
+                
+                c[0] = 0x25;
+                c[1] = 0x39;
+                
+                d.write(0, 0, c, 2);
+                
+                c[0] = 0xc5;
+                c[1] = 0xe0;
+                d.write(0, 0, c, 2);
+                // =======================================
+            }
         }
     }
     
-    printf("%d\n", d.ledOn());
+//    printf("%d\n", d.ledOn());
+
+    (* d.getInterface(0))->ReadPipeAsync(d.getInterface(0), 2, bbuf, readsize, inputcb, &d);
+    CFRunLoopRun();
     
     return 0;
 }
